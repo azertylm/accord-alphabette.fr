@@ -1,31 +1,31 @@
 import type { AlphaAppConfig } from '@alphabette/shell';
 
 /**
- * Configuration de l'application.
- * C'est ici que l'on décrit l'identité du site : son nom, son sous-titre, sa
- * couleur, son sous-domaine et ses liens (dons, compte, clés d'API).
+ * ACCORD — l'identité du site.
+ *
+ * Toute la palette (jour, nuit, densité, plein écran) dérive de `accent` via
+ * les variables --ab-* de la base commune. Ne jamais coder une couleur d'UI
+ * ailleurs que dans cette couleur d'identité.
  */
 export const APP: AlphaAppConfig = {
   key: 'accord',
   name: 'ACCORD',
   tagline: 'CE QUI TE FAIT DU BIEN S’ENTEND',
 
-  // Couleur d'identité du site : toute la base s'y adapte.
+  // Violet sonore : ni chaud, ni froid, la couleur d'une note tenue.
   accent: '#6d28d9',
 
   // Adresses publiques (sous-domaine + chemin sur alphabette.fr).
   subdomain: 'accord',
   homePath: '/accord',
 
-  // Liens de l'écosystème.
+  // Liens de l'écosystème : tarifs, dons et IBAN viennent du hub.
   donUrl: 'https://alphabette.fr/don',
   accountUrl: 'https://alphabette.fr/compte',
   apiKeysUrl: 'https://alphabette.fr/cles',
 
-  // Compteur de la barre écosystème : calculé automatiquement depuis le
-  // registre central (X applications en ligne / Y au total). Pour forcer des
-  // valeurs précises (ex. essai en cours), décommenter :
-  // counter: { unlocked: 3, total: 16, trialDaysLeft: 7 },
+  // Le compteur (x/y) est calculé automatiquement depuis le registre central.
+  // Ne jamais le coder en dur : il se décale à chaque nouvelle application.
 
   apiKeyState: 'ok',
   accountState: 'ok',
