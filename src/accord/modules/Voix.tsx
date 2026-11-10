@@ -53,6 +53,8 @@ export function Voix({
   const [modeTexte, setModeTexte] = useState(false);
   const [source, setSource] = useState<'local' | 'mistral'>('local');
   const [enregistre, setEnregistre] = useState(false);
+  const [motsCompris, setMotsCompris] = useState(true);
+  const [recoNavigateur, setRecoNavigateur] = useState(false);
 
   const flux = useRef<MediaStream | null>(null);
   const contexte = useRef<AudioContext | null>(null);
@@ -129,6 +131,7 @@ export function Voix({
       }
 
       setEnvies(retenues);
+      setMotsCompris(texte.trim().length > 0);
       setSource(depuis);
       setEnregistre(Boolean(audio));
       setEtape('resultat');
@@ -187,6 +190,7 @@ export function Voix({
     setTranscription('');
     setEnvies([]);
     setEnregistre(false);
+    setRecoNavigateur(false);
     echantillons.current = [];
     morceaux.current = [];
     texteReconnu.current = '';
@@ -240,6 +244,7 @@ export function Voix({
           };
           reco.start();
           reconnaissance.current = reco;
+          setRecoNavigateur(true);
         } catch {
           /* reconnaissance indisponible : on continue sans texte. */
         }
@@ -303,8 +308,9 @@ export function Voix({
         intro={
           <p className="ac-intro">
             Parle vingt secondes de ta journée, comme à un ami. Ce qui t’a énervé, ce qui t’a plu, ce
-            que tu n’as pas eu le temps de faire. ACCORD repère les élans et les manques, et en tire
-            trois envies à satisfaire cette semaine.
+            que tu n’as pas eu le temps de faire. ACCORD repère quelques mots et le ton de ta voix, et te
+            propose trois idées pour cette semaine. Ce sont des suggestions simples, pas une analyse
+            psychologique ni un avis médical.
           </p>
         }
       />
@@ -320,8 +326,10 @@ export function Voix({
             </button>
             <p className="ac-voix__invite">Vingt secondes, sans te préparer.</p>
             <p className="ac-voix__aide">
-              Personne n’écoute à part toi. Le son reste dans cet appareil ; si tu ajoutes une clé
-              Mistral, il part chez Mistral en France pour la transcription, puis il est oublié.
+              ACCORD ne garde aucun enregistrement. Pour comprendre tes mots, ton navigateur peut
+              toutefois envoyer le son à son éditeur (Google pour Chrome, Apple pour Safari). Avec
+              une clé Mistral, le son peut aussi être envoyé à Mistral pour être transcrit. Si tu
+              préfères que rien ne parte, utilise le repli écrit ci-dessous.
             </p>
           </div>
 
@@ -388,8 +396,8 @@ export function Voix({
           </div>
           <ul className="ac-analyse__lignes">
             <li>Énergie, variations, silences</li>
-            <li>Ce qui revient sans que tu le dises</li>
-            <li>Trois envies à satisfaire cette semaine</li>
+            <li>Les mots reconnus, quand il y en a</li>
+            <li>Trois idées pour cette semaine</li>
           </ul>
         </div>
       )}
@@ -411,6 +419,14 @@ export function Voix({
           </header>
 
           {erreur && <p className="ac-erreur">{erreur}</p>}
+
+          {!motsCompris && (
+            <Note>
+              Tes mots n’ont pas pu être reconnus sur cet appareil : ces trois idées viennent
+              seulement du volume et des pauses de ta voix, elles sont donc très générales. Pour un
+              résultat plus juste, écris trois mots avec « Refaire ».
+            </Note>
+          )}
 
           <div className="ac-envies">
             {envies.map((envie, index) => (
@@ -440,9 +456,13 @@ export function Voix({
           </div>
 
           <p className="ac-mini-note ac-mini-note--centre">
-            {enregistre && source === 'mistral'
-              ? 'L’enregistrement a été transmis à Mistral en France pour la transcription, puis oublié.'
-              : 'Aucun enregistrement n’a quitté cet appareil. Seules l’énergie et les pauses ont été mesurées.'}
+            {source === 'mistral'
+              ? 'Ton texte (et, si besoin, l’enregistrement) a été envoyé à Mistral pour cette réponse. ACCORD ne garde rien.'
+              : recoNavigateur
+                ? 'ACCORD ne garde aucun enregistrement. La reconnaissance des mots a pu passer par l’éditeur de ton navigateur.'
+                : enregistre
+                  ? 'Aucun enregistrement n’a quitté cet appareil. Seuls le volume et les pauses ont été mesurés.'
+                  : 'Rien n’a été enregistré : seuls tes mots écrits ont été lus, sur cet appareil.'}
           </p>
 
           {!lireCle() && <ReglageCle />}

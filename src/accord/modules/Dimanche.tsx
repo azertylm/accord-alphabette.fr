@@ -5,7 +5,6 @@ import {
   dateLongue,
   emojiMeteo,
   familleMeteo,
-  motifReservation,
   prochainDimanche,
   telechargerInvitation,
   texteMeteo,
@@ -99,7 +98,7 @@ export function Dimanche({
       conseilDimanche(
         choix.nom,
         ages.map((age) => `${age} ans`).join(', '),
-        `${texteMeteo(meteo.code, meteo.temperature)} (${meteo.temperature} °C)`,
+        meteo.indisponible ? 'prévision inconnue' : `${texteMeteo(meteo.code, meteo.temperature)} (${meteo.temperature} °C)`,
       )
         .then((texte) => {
           if (jetonConseil.current === jeton) setConseil(texte);
@@ -123,8 +122,6 @@ export function Dimanche({
     setVariante(0);
   };
 
-  const motif = sortie ? motifReservation(sortie.reference) : [];
-  const familleM = meteo ? familleMeteo(meteo.code, meteo.temperature) : 'sec';
 
   return (
     <div className="ac-page">
@@ -134,23 +131,31 @@ export function Dimanche({
         intro={
           <p className="ac-intro">
             Dis-nous seulement l’âge des enfants. ACCORD regarde la météo de ton coin, tient compte de
-            ton budget et choisit <b>une</b> sortie pour dimanche — avec la fiche de réservation et
-            l’invitation d’agenda déjà prêtes.
+            ton budget et propose <b>une</b> idée de sortie pour dimanche, avec un mémo et l’invitation d’agenda.
+            ACCORD ne réserve rien : c’est toi qui vérifies et réserves auprès du lieu.
           </p>
         }
       />
 
       <div className="ac-meteo">
         <span className="ac-meteo__emoji" aria-hidden="true">
-          {meteo ? emojiMeteo(meteo.code) : '…'}
+          {meteo && !meteo.indisponible ? emojiMeteo(meteo.code) : '…'}
         </span>
         <div>
           <b>
-            {meteo
-              ? `${meteo.temperature} °C · ${texteMeteo(meteo.code, meteo.temperature)}`
-              : 'Je regarde le ciel…'}
+            {!meteo
+              ? 'Je regarde la prévision…'
+              : meteo.indisponible
+                ? 'Prévision indisponible'
+                : `Dimanche : ${meteo.temperature} °C max · ${texteMeteo(meteo.code, meteo.temperature)}`}
           </b>
-          <span>{meteo ? meteo.ville : 'géolocalisation facultative'}</span>
+          <span>
+            {!meteo
+              ? 'géolocalisation facultative'
+              : meteo.indisponible
+                ? 'Regarde la météo avant de partir : l’idée proposée n’en tient pas compte.'
+                : `${meteo.ville} · prévision Open-Meteo, à revérifier la veille`}
+          </span>
         </div>
         <span className="ac-meteo__tag">
           {dateAffichee} · {sortie ? sortie.heure : '10 h 30'}
@@ -225,7 +230,7 @@ export function Dimanche({
 
             <div className="ac-sortie__texte">
               <p className="ac-eyebrow">
-                Ta sortie · {familleM === 'pluie' ? 'à l’abri' : 'dehors'} · {sortie.duree}
+                Ton idée de sortie · {sortie.duree}
               </p>
               <h2 className="ac-sortie__titre">{sortie.nom}</h2>
               <p className="ac-sortie__lieu">{sortie.lieu}</p>
@@ -235,8 +240,7 @@ export function Dimanche({
               </p>
 
               <div className="ac-sortie__infos">
-                <span>{sortie.prix}</span>
-                <span>{sortie.places} places</span>
+                <span>{sortie.prix} (prix indicatif)</span>
                 <span>{dateAffichee}</span>
               </div>
 
@@ -266,7 +270,7 @@ export function Dimanche({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Réserver mes billets ↗
+                  Chercher le lieu et ses tarifs ↗
                 </a>
                 <Bouton
                   variante="lien"
@@ -282,30 +286,25 @@ export function Dimanche({
 
           <section className="ac-billet">
             <div className="ac-billet__tete">
-              <span>Fiche de réservation ACCORD</span>
-              <b>{sortie.reference}</b>
+              <span>Mémo de la sortie</span>
+              <b>Rien n’est réservé</b>
             </div>
             <div className="ac-billet__corps">
-              <div className="ac-billet__code" aria-hidden="true">
-                {motif.map((actif, index) => (
-                  <i key={index} className={actif ? 'ac-billet__point' : ''} />
-                ))}
-              </div>
               <div className="ac-billet__infos">
                 <h3>{sortie.nom}</h3>
                 <p>
-                  {dateAffichee} · {sortie.heure} · {sortie.places} places
+                  {dateAffichee} · vers {sortie.heure}
                 </p>
                 <p>{sortie.lieu}</p>
                 <p className="ac-mini-note">
-                  ACCORD ne vend pas les billets : ton créneau et ta fiche sont prêts, la billetterie
-                  s’ouvre en un clic sur le site du lieu.
+                  Ceci est un mémo, pas un billet. ACCORD ne connaît pas les lieux près de chez toi,
+                  ne réserve pas et ne vend rien : vérifie l’ouverture, les horaires et les tarifs
+                  sur le site du lieu avant de partir.
                 </p>
               </div>
             </div>
             <div className="ac-billet__pied">
-              <span>{sortie.prix}</span>
-              <span>{sortie.reference}</span>
+              <span>{sortie.prix} (prix indicatif)</span>
             </div>
           </section>
 
@@ -327,9 +326,9 @@ export function Dimanche({
           </div>
 
           <Note>
-            La sortie est stable pour ce week-end : elle ne change pas entre samedi soir et dimanche
-            matin. Si tu demandes une autre idée, ACCORD reste dans les mêmes contraintes d’âge, de
-            météo et de budget.
+            L’idée reste la même pendant la semaine tant que la prévision ne change pas de catégorie.
+            Si tu demandes une autre idée, ACCORD reste dans les mêmes contraintes d’âge, de météo
+            et de budget. Les prix sont des ordres de grandeur.
           </Note>
         </>
       )}

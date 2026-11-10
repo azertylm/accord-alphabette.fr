@@ -37,15 +37,15 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'silence',
     nom: 'Du silence',
-    phrase: 'Ta journée a été bruyante. Ce n’est pas de la solitude qu’il te faut, c’est du calme.',
+    phrase: 'Si ta journée a été bruyante, ce n’est peut-être pas de solitude dont tu as besoin, mais de calme.',
     action: 'Ferme la porte vingt minutes',
     mots: ['bruit', 'bruyant', 'fatigue', 'fatigué', 'tete', 'tête', 'stress', 'cri', 'cris', 'monde', 'agace'],
-    url: () => recherche('casque réduction de bruit silence'),
+    url: () => recherche('exercice de calme cinq minutes'),
   },
   {
     id: 'dehors',
     nom: 'De l’air',
-    phrase: 'Tu as passé trop de temps entre des murs. Ton corps demande un peu d’horizon.',
+    phrase: 'Si tu as passé beaucoup de temps entre des murs, un peu d’horizon peut faire du bien.',
     action: 'Marche sans écouteurs',
     mots: ['enferme', 'enfermé', 'sortir', 'marcher', 'dehors', 'respirer', 'air', 'parc', 'jardin'],
     url: () => carte('parc jardin proche'),
@@ -53,7 +53,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'compagnie',
     nom: 'De la compagnie',
-    phrase: 'Tu as parlé de quelqu’un, ou à quelqu’un qui n’était pas là. Le manque est du côté des visages.',
+    phrase: 'Peut-être qu’un visage te manque. Voir ou entendre quelqu’un change souvent une semaine.',
     action: 'Appelle une personne ce soir',
     mots: ['seul', 'seule', 'ami', 'amie', 'parler', 'voir', 'famille', 'copain', 'copine', 'manque'],
     url: () => carte('café ouvert ce soir'),
@@ -61,7 +61,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'mouvement',
     nom: 'Bouger',
-    phrase: 'L’énergie est là mais elle tourne en rond. Il lui faut un corps, pas une pensée de plus.',
+    phrase: 'Si l’énergie tourne en rond, il lui faut peut-être un corps en mouvement plutôt qu’une pensée de plus.',
     action: 'Vingt minutes de marche rapide',
     mots: ['energie', 'énergie', 'courir', 'sport', 'danser', 'immobile', 'bouger', 'nerveux', 'agite'],
     url: () => carte('parc sport plein air'),
@@ -69,15 +69,15 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'creer',
     nom: 'Créer',
-    phrase: 'Une idée a essayé de passer aujourd’hui. Elle mérite dix minutes de vraie attention.',
+    phrase: 'Si une idée a essayé de passer aujourd’hui, elle mérite dix minutes de vraie attention.',
     action: 'Commence par dix minutes',
     mots: ['idee', 'idée', 'dessiner', 'ecrire', 'écrire', 'projet', 'faire', 'creer', 'créer', 'atelier'],
-    url: () => recherche('carnet de croquis papier'),
+    url: () => recherche('idées pour commencer à créer dix minutes'),
   },
   {
     id: 'ecouter',
     nom: 'Écouter',
-    phrase: 'Tu as besoin d’un son choisi par toi, pas d’un fond sonore subi.',
+    phrase: 'Un son choisi par toi fait souvent plus de bien qu’un fond sonore subi.',
     action: 'Mets un disque entier',
     mots: ['musique', 'silence', 'bruit', 'chanson', 'radio', 'ecouter', 'écouter', 'playlist', 'son'],
     url: (q) => `https://www.deezer.com/search/${encodeURIComponent(q || 'album entier')}`,
@@ -85,7 +85,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'dormir',
     nom: 'Dormir',
-    phrase: 'La fatigue n’est pas un détail de la journée : c’est peut-être son vrai message.',
+    phrase: 'La fatigue n’est pas un détail de la journée : c’est peut-être son vrai message. Si elle dure des semaines, parles-en à ton médecin.',
     action: 'Couche-toi trente minutes plus tôt',
     mots: ['fatigue', 'fatigué', 'nuit', 'sommeil', 'reveil', 'réveil', 'epuise', 'épuisé', 'dormir', 'courte nuit'],
     url: () => recherche('routine sommeil trente minutes'),
@@ -93,7 +93,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'manger',
     nom: 'Manger',
-    phrase: 'Tu as sauté un repas, ou mangé debout. Le goût est une manière lente de prendre soin de soi.',
+    phrase: 'Si tu as sauté un repas ou mangé debout, un vrai repas est une manière lente de prendre soin de toi.',
     action: 'Cuisine un plat simple',
     mots: ['faim', 'repas', 'cuisine', 'cuisiner', 'gout', 'goût', 'restaurant', 'manger', 'dejeuner', 'déjeuner'],
     url: () => recherche('recette simple 20 minutes'),
@@ -101,7 +101,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'ralentir',
     nom: 'Ralentir',
-    phrase: 'La journée a filé sans que tu la choisisses. Une pause n’est pas une récompense, c’est un besoin.',
+    phrase: 'Si la journée a filé sans que tu la choisisses, rappelle-toi qu’une pause n’est pas une récompense : c’est un besoin.',
     action: 'Quinze minutes sans écran',
     mots: ['course', 'presse', 'pressé', 'temps', 'pause', 'vite', 'urgent', 'debordé', 'deborder'],
     url: () => recherche('exercice respiration cinq minutes'),
@@ -109,7 +109,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'lire',
     nom: 'Lire',
-    phrase: 'Une histoire te ferait du bien, mais tu n’as pas osé t’arrêter assez longtemps.',
+    phrase: 'Une histoire te ferait peut-être du bien, si tu t’autorises à t’arrêter assez longtemps.',
     action: 'Ouvre le livre posé sur la table',
     mots: ['livre', 'lire', 'histoire', 'page', 'calme', 'roman', 'librairie', 'lecture'],
     url: () => carte('librairie indépendante'),
@@ -117,7 +117,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'appeler',
     nom: 'Donner des nouvelles',
-    phrase: 'Quelqu’un t’a traversé l’esprit aujourd’hui. Ce n’est pas anodin.',
+    phrase: 'Si quelqu’un t’a traversé l’esprit aujourd’hui, ce n’est peut-être pas anodin.',
     action: 'Envoie un message maintenant',
     mots: ['famille', 'mere', 'mère', 'pere', 'père', 'nouvelles', 'appeler', 'telephone', 'téléphone', 'soeur', 'frere'],
     url: () => 'sms:',
@@ -125,7 +125,7 @@ export const ENVIES: EnvieModele[] = [
   {
     id: 'chanter',
     nom: 'Chanter',
-    phrase: 'Ta voix a envie de sortir, même faux, même sous la douche.',
+    phrase: 'Ta voix a peut-être envie de sortir, même faux, même sous la douche.',
     action: 'Chante une chanson entière',
     mots: ['chanter', 'voix', 'fredonner', 'musique', 'chanson', 'douche'],
     url: (q) => `https://www.deezer.com/search/${encodeURIComponent(q || 'chanson à chanter')}`,

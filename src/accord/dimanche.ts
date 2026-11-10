@@ -4,15 +4,19 @@ import type { FamilleId, Sortie } from './types';
  * L'activité du dimanche — une seule, jamais un programme.
  *
  * L'âge des enfants, la météo du lieu et le budget suffisent. Le catalogue est
- * local, donc rien ne dépend d'une API de sorties : ACCORD choisit, prépare la
- * fiche de réservation et l'invitation d'agenda. La billetterie s'ouvre en un
- * clic ; l'application ne prétend pas vendre les billets elle-même.
+ * local, donc rien ne dépend d'une API de sorties : ACCORD choisit, prépare un
+ * mémo et l'invitation d'agenda. ACCORD ne réserve rien et ne vend rien : un
+ * lien ouvre une recherche pour trouver le lieu et sa billetterie.
  */
 
 export interface Meteo {
   temperature: number;
   code: number;
   ville: string;
+  /** Vrai si la prévision n'a pas pu être chargée : rien n'est alors affiché comme une mesure. */
+  indisponible?: boolean;
+  /** Vrai si les chiffres sont la prévision du dimanche (et non le temps du moment). */
+  prevision?: boolean;
   latitude: number;
   longitude: number;
 }
@@ -46,9 +50,9 @@ export const ACTIVITES: Activite[] = [
     description:
       'Arriver à l’ouverture, prendre une seule salle, laisser les enfants choisir leur objet préféré. Une heure et demie suffit — et évite la fatigue des grands parcours.',
     pourquoi: 'À l’abri, calme le matin, et les collections naturalistes parlent aux petits comme aux grands.',
-    preparation: ['Réserver le créneau de 10 h 30', 'Prendre une gourde', 'Choisir une seule salle'],
+    preparation: ['Vérifier horaires et tarifs sur le site du musée', 'Prendre une gourde', 'Choisir une seule salle'],
     duree: '1 h 30',
-    prix: '≈ 12 € par adulte, gratuit pour les moins de 18 ans',
+    prix: '≈ 12 € par adulte, souvent gratuit pour les enfants',
     budget: 'petit',
     ageMin: 4,
     ageMax: 14,
@@ -61,9 +65,9 @@ export const ACTIVITES: Activite[] = [
     nom: 'La ferme pédagogique',
     lieu: 'Une ferme urbaine ou pédagogique à 30 minutes',
     description:
-      'Nourrir les chèvres, voir traire, finir par un goûter. Les enfants bougent, les adultes ralentissent. Prévoir des bottes même s’il ne pleut pas.',
+      'Nourrir les chèvres, voir traire, finir par un goûter. Les enfants bougent, les adultes ralentissent. Prévoir des bottes même s’il ne pleut pas, et se laver les mains après les animaux.',
     pourquoi: 'Le contact animal fonctionne à tous les âges, et la sortie reste courte.',
-    preparation: ['Vérifier les horaires de traite', 'Bottes et change', 'Un peu de grain autorisé'],
+    preparation: ['Vérifier les horaires de traite', 'Bottes et change', 'Ne nourrir les animaux qu’avec l’accord de la ferme'],
     duree: '2 h',
     prix: '≈ 6 € par personne',
     budget: 'petit',
@@ -129,9 +133,9 @@ export const ACTIVITES: Activite[] = [
     nom: 'La piscine au réveil',
     lieu: 'La piscine municipale avec bassin ludique',
     description:
-      'Ouvrir à 9 h, nager quarante minutes, puis le goûter. Les bassins ludiques sont souvent vides le dimanche matin.',
+      'Arriver à l’ouverture, nager quarante minutes, puis le goûter. Les bassins ludiques sont souvent vides le dimanche matin.',
     pourquoi: 'Peu de monde, un budget maîtrisé, et tout le monde ressort détendu.',
-    preparation: ['Vérifier les horaires du dimanche', 'Bonnet obligatoire', 'Pièce pour le casier'],
+    preparation: ['Vérifier les horaires du dimanche', 'Bonnet de bain (souvent obligatoire)', 'Pièce pour le casier'],
     duree: '1 h 30',
     prix: '≈ 5 € par adulte',
     budget: 'gratuit',
@@ -231,7 +235,7 @@ export const ACTIVITES: Activite[] = [
     nom: 'La cuisine à quatre mains',
     lieu: 'La cuisine de la maison',
     description:
-      'Une pâte à pizza qui pousse pendant que l’on range, chacun sa garniture, et le four à 250 °C. Le dimanche devient un atelier, sans trajet.',
+      'Une pâte à pizza qui pousse pendant que l’on range, chacun sa garniture, et le four à 250 °C (un adulte enfourne). Le dimanche devient un atelier, sans trajet.',
     pourquoi: 'Zéro billet, zéro météo, et les enfants mangent ce qu’ils ont fait.',
     preparation: ['Sortir la farine la veille', 'Deux heures de pousse', 'Un tablier par enfant'],
     duree: '3 h',
@@ -294,26 +298,37 @@ function position(): Promise<{ latitude: number; longitude: number } | null> {
   });
 }
 
+function jourIso(date: Date): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+/**
+ * La météo du PROCHAIN DIMANCHE (prévision Open-Meteo), pas celle du moment :
+ * c'est ce jour-là que la sortie a lieu. Si la prévision ne répond pas, on le
+ * dit — aucun chiffre inventé n'est affiché.
+ */
 export async function chargerMeteo(): Promise<Meteo> {
   const point = await position();
   const latitude = point?.latitude ?? 48.8566;
   const longitude = point?.longitude ?? 2.3522;
-  const ville = point ? 'autour de toi' : 'Paris (par défaut)';
+  const ville = point ? 'autour de toi' : 'Paris (position non partagée)';
+  const jour = jourIso(prochainDimanche());
   try {
     const reponse = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=auto`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max&timezone=auto&start_date=${jour}&end_date=${jour}`,
     );
     if (!reponse.ok) throw new Error('météo indisponible');
-    const json = (await reponse.json()) as { current?: { temperature_2m?: number; weather_code?: number } };
-    return {
-      temperature: Math.round(json.current?.temperature_2m ?? 14),
-      code: json.current?.weather_code ?? 2,
-      ville,
-      latitude,
-      longitude,
+    const json = (await reponse.json()) as {
+      daily?: { weather_code?: (number | null)[]; temperature_2m_max?: (number | null)[] };
     };
+    const code = json.daily?.weather_code?.[0];
+    const temperature = json.daily?.temperature_2m_max?.[0];
+    if (typeof code !== 'number' || typeof temperature !== 'number') throw new Error('prévision vide');
+    return { temperature: Math.round(temperature), code, ville, latitude, longitude, prevision: true };
   } catch {
-    return { temperature: 14, code: 2, ville, latitude, longitude };
+    // Valeurs neutres pour le choix de la sortie, jamais affichées comme une mesure.
+    return { temperature: 14, code: 2, ville, latitude, longitude, indisponible: true };
   }
 }
 
@@ -337,10 +352,10 @@ export function emojiMeteo(code: number): string {
 
 export function texteMeteo(code: number, temperature: number): string {
   const famille = familleMeteo(code, temperature);
-  if (famille === 'pluie') return 'il pleut';
-  if (famille === 'froid') return 'il fait froid';
-  if (famille === 'chaud') return 'il fait bon';
-  return 'le ciel est clair';
+  if (famille === 'pluie') return 'pluie ou neige prévue';
+  if (famille === 'froid') return 'froid prévu';
+  if (famille === 'chaud') return 'chaleur prévue';
+  return 'temps sec prévu';
 }
 
 /* --------------------------------------------------------------------------
@@ -433,7 +448,7 @@ export function choisirSortie(
     date: dimanche.toISOString(),
     heure: '10 h 30',
     places,
-    lienBillets: `https://www.google.com/search?q=${encodeURIComponent(`${activite.requete} ${dateLongue(dimanche)}`)}`,
+    lienBillets: `https://www.google.com/search?q=${encodeURIComponent(`${activite.requete} près de moi horaires tarifs`)}`,
     source: 'local',
   };
 }
@@ -442,7 +457,7 @@ export function choisirSortie(
    Billets et agenda
 -------------------------------------------------------------------------- */
 
-/** Un motif carré déterministe, purement décoratif : la fiche de réservation. */
+/** Ancien motif décoratif (plus affiché : il ressemblait à un vrai code de billet). */
 export function motifReservation(reference: string): boolean[] {
   let graine = hashChaine(reference);
   return Array.from({ length: 49 }, (_, index) => {
@@ -478,7 +493,7 @@ export function invitationIcs(sortie: Sortie): string {
     `SUMMARY:${echapperIcs(sortie.nom)}`,
     `LOCATION:${echapperIcs(sortie.lieu)}`,
     `DESCRIPTION:${echapperIcs(
-      `${sortie.description}\n\nRéservation ${sortie.reference} · ${sortie.places} places.\n${sortie.lienBillets}`,
+      `${sortie.description}\n\nIdée de sortie proposée par ACCORD. Rien n'est réservé : vérifier horaires, tarifs et réservation auprès du lieu.\n${sortie.lienBillets}`,
     )}`,
     'END:VEVENT',
     'END:VCALENDAR',
@@ -491,7 +506,7 @@ export function telechargerInvitation(sortie: Sortie) {
   const url = URL.createObjectURL(blob);
   const lien = document.createElement('a');
   lien.href = url;
-  lien.download = `accord-dimanche-${sortie.reference}.ics`;
+  lien.download = `accord-dimanche-${sortie.id}.ics`;
   document.body.appendChild(lien);
   lien.click();
   lien.remove();

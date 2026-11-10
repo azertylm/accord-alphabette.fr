@@ -236,9 +236,10 @@ export function Accueil({
             même carte d’écoute. Rien ne se ressaisit.
           </p>
           <p>
-            <b>Aucun son ne part.</b> Les extraits sont synthétisés dans ton navigateur. Sans clé,
-            rien n’est envoyé ; avec une clé Mistral, seuls les textes nécessaires partent, en
-            France.
+            <b>Ce qui part, dit clairement.</b> Les extraits sont synthétisés dans ton navigateur
+            et ton profil y reste. Trois exceptions : la prévision météo (ta position approximative,
+            si tu l’autorises), la reconnaissance vocale de ton navigateur, et Mistral si tu ajoutes
+            ta clé.
           </p>
         </div>
         <Note>

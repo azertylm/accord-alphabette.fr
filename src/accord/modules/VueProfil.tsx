@@ -110,7 +110,7 @@ export function VueProfil({
           <div className="ac-profil-bloc__tete">
             <div>
               <p className="ac-eyebrow">Module 02 · l’activité du dimanche</p>
-              <h2 className="ac-sous-titre">Ta sortie prête</h2>
+              <h2 className="ac-sous-titre">Ton idée de sortie</h2>
             </div>
             <Bouton variante="lien" onClick={() => onModule('dimanche')}>
               {profil.sortie ? 'Changer' : 'Préparer dimanche'}
@@ -123,8 +123,7 @@ export function VueProfil({
                 <b>{profil.sortie.nom}</b>
                 <p>{profil.sortie.lieu}</p>
                 <span>
-                  {dateLongue(new Date(profil.sortie.date))} · {profil.sortie.heure} ·{' '}
-                  {profil.sortie.places} places · {profil.sortie.reference}
+                  {dateLongue(new Date(profil.sortie.date))} · vers {profil.sortie.heure} · rien n’est réservé
                 </span>
               </div>
             </div>

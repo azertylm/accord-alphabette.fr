@@ -15,8 +15,8 @@ export const LECONS: Lecon[] = [
     domaine: 'Musique',
     accroche: 'En 1952, un pianiste n’a joué aucune note pendant quatre minutes et trente-trois secondes.',
     paragraphes: [
-      'La pièce s’appelle 4′33″. John Cage y monte sur scène, ouvre le couvercle du piano, consulte un chronomètre, puis referme le couvercle. Trois mouvements, aucun son volontaire. Le public, d’abord gêné, entend bientôt autre chose : la ventilation, une chaise, la pluie sur le toit, son propre souffle.',
-      'Cage ne cherchait pas le vide. Il voulait prouver qu’il n’existe pas : dans une salle anéchoïque, il avait encore entendu deux sons, le système nerveux et la circulation du sang. Le silence absolu est un mythe d’ingénieur. Ce que nous appelons silence est toujours un fond sonore que nous avons cessé d’écouter.',
+      'La pièce s’appelle 4′33″ et elle est de John Cage. À la création, le pianiste David Tudor s’assoit, ferme le couvercle du clavier, consulte un chronomètre, puis rouvre le couvercle entre les mouvements. Trois mouvements, aucun son volontaire. Le public, d’abord gêné, entend bientôt autre chose : la ventilation, une chaise, la pluie sur le toit, son propre souffle.',
+      'Cage ne cherchait pas le vide. Il voulait prouver qu’il n’existe pas : dans une salle anéchoïque, il racontait avoir encore entendu deux sons, qu’on lui attribua à son système nerveux et à la circulation de son sang. Le silence absolu est un mythe d’ingénieur. Ce que nous appelons silence est toujours un fond sonore que nous avons cessé d’écouter.',
       'La leçon vaut pour nos oreilles saturées : baisser le volume n’est pas se priver de musique, c’est changer de partition. Le monde continue de jouer, avec ou sans nous.',
     ],
     points: [
@@ -25,7 +25,7 @@ export const LECONS: Lecon[] = [
       'Écouter le fond, c’est déjà composer.',
     ],
     anecdote:
-      'À la création, certains spectateurs sont partis furieux. Aujourd’hui, la pièce est l’une des plus jouées du répertoire contemporain — et souvent la plus silencieuse.',
+      'À la création, certains spectateurs sont partis furieux. Aujourd’hui, la pièce est l’une des plus célèbres du répertoire contemporain — et sans doute la plus silencieuse.',
     action: 'Coupe le son trente secondes et nomme trois choses que tu entends.',
     mots: ['silence', 'écoute', 'contemporain', 'expérience'],
     familles: ['nuit', 'pluie', 'papier'],
@@ -91,7 +91,7 @@ export const LECONS: Lecon[] = [
       'Le silence fait partie de l’improvisation.',
     ],
     anecdote:
-      'Le mot « jazz » vient probablement de l’argot américain, mais son origine exacte reste disputée. Le genre a d’abord été une danse avant d’être une musique savante.',
+      'Le mot « jazz » vient probablement de l’argot américain, mais son origine exacte reste disputée. Le genre a d’abord été une musique de danse avant d’être écouté en concert.',
     action: 'Écoute un solo et compte les silences plutôt que les notes.',
     mots: ['jazz', 'improvisation', 'rythme', 'voix'],
     familles: ['cuivre', 'ville', 'foyer'],
@@ -113,7 +113,7 @@ export const LECONS: Lecon[] = [
       'La bonne lumière se prépare plus qu’elle ne se déclenche.',
     ],
     anecdote:
-      'Le mot « photographie » signifie littéralement « écrire avec la lumière ». Le premier cliché permanent, en 1826, a demandé huit heures de pose.',
+      'Le mot « photographie » signifie littéralement « écrire avec la lumière ». Le plus ancien cliché conservé, pris par Nicéphore Niépce vers 1826-1827, a demandé au moins plusieurs heures de pose.',
     action: 'Sors voir la même façade deux fois dans la journée et compare.',
     mots: ['lumière', 'photo', 'couleur', 'patience'],
     familles: ['clairiere', 'neon', 'vague'],
@@ -125,7 +125,7 @@ export const LECONS: Lecon[] = [
     domaine: 'Urbanisme',
     accroche: 'Une rue garde la trace de ce qu’on y a fait, même quand les murs ont changé.',
     paragraphes: [
-      'Les urbanistes parlent de « persistance du tracé » : un chemin de charrette devient une rue, puis un boulevard, puis une ligne de tram. Le plan survive aux bâtiments. À Paris, la rue Saint-Honoré suit un axe gallo-romain ; à Lyon, les pentes de la Croix-Rousse gardent le dessin des canuts.',
+      'Les urbanistes parlent de « persistance du tracé » : un chemin de charrette devient une rue, puis un boulevard, puis une ligne de tram. Le plan survit aux bâtiments. À Paris, la rue Saint-Jacques suit encore le grand axe nord-sud de la ville gallo-romaine ; à Lyon, les pentes de la Croix-Rousse gardent le dessin des canuts.',
       'La mémoire d’une ville est aussi sonore. Les anciens quartiers de métiers avaient leurs bruits : marteaux, scies, voix. Les halles avaient une rumeur qu’aucun marché couvert moderne ne reproduit exactement. Le son est un patrimoine que l’on archive encore mal.',
       'Une ville qui se souvient n’est pas une ville figée. Elle choisit ce qu’elle garde : une façade, un nom, un usage. La mémoire urbaine est un tri, pas une conservation intégrale.',
     ],
@@ -147,8 +147,8 @@ export const LECONS: Lecon[] = [
     domaine: 'Cuisine',
     accroche: 'Farine, eau, sel, levain : la quatrième chose est le temps.',
     paragraphes: [
-      'Une pâte à pain n’est pas un mélange, c’est une fermentation. Les levures et les bactéries lactiques transforment les sucres, produisent du gaz et des acides. Plus la pâte fermente lentement, plus les arômes se complexent et plus la mie devient digeste.',
-      'Le froid ralentit cette fermentation sans l’arrêter. Une pousse au réfrigérateur pendant douze à vingt-quatre heures donne un pain plus parfumé qu’une pousse rapide à température ambiante. C’est le principe de la baguette de tradition française, souvent fermentée la veille.',
+      'Une pâte à pain n’est pas un mélange, c’est une fermentation. Les levures et les bactéries lactiques transforment les sucres, produisent du gaz et des acides. Plus la pâte fermente lentement, plus les arômes se développent.',
+      'Le froid ralentit cette fermentation sans l’arrêter. Une pousse au réfrigérateur pendant douze à vingt-quatre heures donne un pain plus parfumé qu’une pousse rapide à température ambiante. Beaucoup de boulangers préparent ainsi leur pâte la veille.',
       'La croûte, elle, est une réaction de Maillard : les sucres et les protéines brunissent à haute température. Un four très chaud et un coup de buée produisent une croûte fine et sonore. Le « chant » du pain qui sort du four est le bruit de cette croûte qui se rétracte.',
     ],
     points: [
@@ -167,15 +167,15 @@ export const LECONS: Lecon[] = [
     id: 'oiseaux-ciel',
     titre: 'Comment les oiseaux lisent le ciel',
     domaine: 'Ornithologie',
-    accroche: 'Un rouge-gorge peut sentir le champ magnétique terrestre.',
+    accroche: 'Un rouge-gorge perçoit le champ magnétique terrestre.',
     paragraphes: [
-      'Les oiseaux migrateurs s’orientent avec plusieurs boussoles : le soleil, les étoiles, les repères du paysage et le champ magnétique. La plus étrange est la boussole magnétique. Chez certaines espèces, une protéine de l’œil, la cryptochrome, réagit à la lumière et rend la direction magnétique visible — comme une nuance dans le ciel.',
+      'Les oiseaux migrateurs s’orientent avec plusieurs boussoles : le soleil, les étoiles, les repères du paysage et le champ magnétique. La plus étrange est la boussole magnétique. Chez certaines espèces, une protéine de l’œil, le cryptochrome, réagit à la lumière : selon l’hypothèse la plus étudiée, elle rendrait la direction magnétique perceptible — peut-être comme une nuance dans le champ de vision.',
       'Ils corrigent aussi leur cap avec l’odorat. Des expériences ont montré que des pigeons privés d’odeurs se perdent plus facilement. Le vent porte une carte chimique que nous ne percevons pas.',
       'Les oiseaux ne volent pas « au hasard » : ils suivent des couloirs de migration, souvent les côtes et les vallées. Savoir où ils passent permet de protéger les haltes, ces escales où ils reprennent des forces.',
     ],
     points: [
       'Les oiseaux combinent plusieurs boussoles : soleil, étoiles, paysage, magnétisme.',
-      'La cryptochrome de l’œil joue un rôle dans la perception du champ magnétique.',
+      'Le cryptochrome de l’œil jouerait un rôle dans la perception du champ magnétique.',
       'L’odorat aide aussi à s’orienter.',
     ],
     anecdote:
@@ -223,7 +223,7 @@ export const LECONS: Lecon[] = [
       'Les mythes servent à rendre pensable ce qui échappe.',
     ],
     anecdote:
-      'Morphée n’est pas un dieu grec à proprement parler : c’est un des Oneiroi, les rêves, fils d’Hypnos. Son nom a donné « morphine », pour sa capacité à façonner des formes.',
+      'Morphée n’est pas un dieu grec à proprement parler : c’est un des Oneiroi, les rêves, fils d’Hypnos. Son nom, lié au mot grec pour « forme », a donné « morphine », parce que cette substance fait dormir.',
     action: 'Donne un nom à ta dernière nuit difficile, comme on nomme un personnage.',
     mots: ['mythe', 'nuit', 'rêve', 'récit'],
     familles: ['nuit', 'vague', 'foyer'],
@@ -236,7 +236,7 @@ export const LECONS: Lecon[] = [
     accroche: 'Le craquement n’est pas un défaut du disque : c’est le bruit du monde qui entre.',
     paragraphes: [
       'Un sillon de vinyle est une gravure microscopique. L’aiguille la parcourt et transforme les aspérités en impulsions électriques. Poussières, rayures et électricité statique produisent des clics brefs, très larges en fréquence : c’est le craquement.',
-      'Le CD a supprimé ces défauts. Pourtant, beaucoup d’auditeurs les regrettent. Les études de psychoacoustique suggèrent que ces bruits agissent comme des repères : ils rappellent l’objet, le geste, la pièce. Ils ajoutent une texture familière à un son par ailleurs très propre.',
+      'Le CD a supprimé ces défauts. Pourtant, beaucoup d’auditeurs les regrettent. Une explication souvent avancée est que ces bruits agissent comme des repères : ils rappellent l’objet, le geste, la pièce. Ils ajoutent une texture familière à un son par ailleurs très propre.',
       'Le vinyle n’est pas « meilleur » techniquement. Sa bande passante, sa dynamique et sa durée de vie sont inférieures au numérique. Mais l’écoute n’est pas qu’une mesure : c’est un rituel, avec sa manipulation, sa face A et sa face B.',
     ],
     points: [
@@ -245,7 +245,7 @@ export const LECONS: Lecon[] = [
       'La supériorité du vinyle est culturelle, pas purement technique.',
     ],
     anecdote:
-      'Le sillon d’un 33 tours mesure environ 0,05 millimètre de large. Une tête de lecture peut se déplacer de plusieurs kilomètres pendant une seule face.',
+      'Le sillon d’un 33 tours mesure environ 0,05 millimètre de large. Déroulé, le sillon d’une seule face mesure plusieurs centaines de mètres.',
     action: 'Écoute un morceau en vinyle et compte les craquements des trente premières secondes.',
     mots: ['vinyle', 'grain', 'objet', 'écoute'],
     familles: ['papier', 'foyer', 'cuivre'],
@@ -267,7 +267,7 @@ export const LECONS: Lecon[] = [
       'Le dérèglement climatique décale les calendriers écologiques.',
     ],
     anecdote:
-      'Le bambou de certaines espèces fleurit tous les 60 à 120 ans, puis meurt. Toute une forêt peut fleurir en même temps, à l’échelle d’un continent.',
+      'Le bambou de certaines espèces fleurit tous les 60 à 120 ans, puis meurt. Toute une forêt peut fleurir en même temps, parfois sur de très vastes régions.',
     action: 'Note la date de la première fleur de ton quartier et compare l’an prochain.',
     mots: ['plantes', 'temps', 'saison', 'nature'],
     familles: ['clairiere', 'vague', 'pluie'],
@@ -289,7 +289,7 @@ export const LECONS: Lecon[] = [
       'La police porte un ton avant le contenu.',
     ],
     anecdote:
-      'Le caractère Comic Sans a été créé en 1994 pour une bande dessinée pédagogique de Microsoft. Il est aujourd’hui l’un des plus décriés — et l’un des plus reconnaissables.',
+      'Le caractère Comic Sans a été dessiné en 1994 chez Microsoft, pour un logiciel grand public, en s’inspirant des lettrages de bande dessinée. Il est aujourd’hui l’un des plus décriés — et l’un des plus reconnaissables.',
     action: 'Prends un mot et écris-le dans trois polices : dis lequel ment le moins.',
     mots: ['typographie', 'lecture', 'forme', 'sens'],
     familles: ['papier', 'ville', 'neon'],
@@ -301,7 +301,7 @@ export const LECONS: Lecon[] = [
     domaine: 'Météorologie',
     accroche: 'L’odeur de la pluie a un nom : le pétrichor.',
     paragraphes: [
-      'Avant l’averse, l’air se charge de molécules produites par les bactéries du sol et les plantes. Quand les premières gouttes frappent la terre sèche, elles projettent ces molécules dans l’air : c’est le pétrichor, cette odeur de terre mouillée que l’on reconnaît instantanément.',
+      'Par temps sec, le sol accumule des molécules produites par ses bactéries et par les plantes. Quand les premières gouttes frappent la terre sèche, elles projettent ces molécules dans l’air : c’est le pétrichor, cette odeur de terre mouillée que l’on reconnaît instantanément.',
       'La pluie naît dans les nuages par coalescence : de petites gouttes s’unissent jusqu’à devenir assez lourdes pour tomber. Dans un nuage d’orage, les courants ascendants peuvent suspendre des gouttes longtemps et fabriquer de la grêle par couches successives.',
       'Les gouttes ne tombent pas en forme de larme. Elles sont presque sphériques quand elles sont petites, puis s’aplatissent en crêpe en grossissant. La forme de larme est une convention de dessin, pas une réalité physique.',
     ],
@@ -324,7 +324,7 @@ export const LECONS: Lecon[] = [
     accroche: 'Les films muets n’étaient pas silencieux.',
     paragraphes: [
       'Dans les salles des années 1910-1920, un pianiste ou un orchestre accompagnait chaque projection. Le son était joué en direct, adapté à la salle et au public. Certaines partitions étaient envoyées avec le film, d’autres improvisées.',
-      'Le passage au parlant, à la fin des années 1920, a bouleversé les corps : les acteurs devaient parler dans un micro caché, les caméras devenaient bruyantes, les décors étaient enfermés dans des cabines. Le jeu s’est figé avant de se réinventer.',
+      'Le passage au parlant, à la fin des années 1920, a bouleversé les corps : les acteurs devaient parler près d’un micro caché, et les caméras, trop bruyantes, étaient enfermées dans des cabines. Le jeu s’est figé avant de se réinventer.',
       'Le muet n’est donc pas une époque sans son, mais une époque où le son n’était pas enregistré avec l’image. Le cinéma a d’abord été une projection accompagnée, comme un concert.',
     ],
     points: [

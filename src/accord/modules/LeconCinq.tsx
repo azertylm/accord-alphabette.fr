@@ -175,7 +175,7 @@ export function LeconCinq({
           </div>
           <div>
             <p className="ac-eyebrow">
-              La leçon du jour · {lecon.source === 'mistral' ? 'Mistral, France' : 'bibliothèque locale'}
+              La leçon du jour · {lecon.source === 'mistral' ? 'écrite par l’IA Mistral — peut contenir des erreurs' : 'bibliothèque locale'}
             </p>
             <h1 className="ac-lecon__titre">{lecon.titre}</h1>
             {lecon.accroche && <p className="ac-lecon__accroche">{lecon.accroche}</p>}

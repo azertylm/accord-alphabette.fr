@@ -212,9 +212,9 @@ export function ReglageCle() {
       <div className="ac-cle">
         <div>
           <strong>IA souveraine, optionnelle.</strong> Sans clé, ACCORD synthétise les neuf sons et
-          calcule tout localement. Avec une clé <em>Mistral AI</em> (serveurs en France), les textes
-          sont écrits plus finement — seuls les mots et les mesures partent, jamais la voix ni les
-          sons.
+          calcule tout localement. Avec une clé <em>Mistral AI</em> (entreprise française), les textes
+          sont écrits plus finement : tes mots et tes mesures lui sont alors envoyés, ainsi que
+          l’enregistrement de ta voix quand il faut le transcrire.
         </div>
         <Bouton variante="fantome" onClick={() => setOuvert((valeur) => !valeur)}>
           {lireCle() ? '🔑 Clé Mistral : prête' : '🔑 Ajouter ma clé Mistral'}
