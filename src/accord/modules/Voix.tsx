@@ -310,7 +310,9 @@ export function Voix({
             Parle vingt secondes de ta journée, comme à un ami. Ce qui t’a énervé, ce qui t’a plu, ce
             que tu n’as pas eu le temps de faire. ACCORD repère quelques mots et le ton de ta voix, et te
             propose trois idées pour cette semaine. Ce sont des suggestions simples, pas une analyse
-            psychologique ni un avis médical.
+            psychologique ni un avis médical. Si tu vas mal en ce moment, tu peux appeler le 3114
+            (prévention du suicide, gratuit, 24 h/24) ou le 15 en cas d’urgence ; parler à ton
+            médecin reste le meilleur appui.
           </p>
         }
       />
